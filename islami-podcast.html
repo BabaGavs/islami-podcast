@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İslami Podcast</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="islami-podcast.css">
+</head>
+<body>
+    <!-- Bismillah Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+        <div class="bismillah-container">
+            <div class="arabic-text">بِسْمِ اللهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="meaning">Rahman ve Rahim olan Allah'ın adıyla</div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="mainApp" class="main-app" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🕌</div>
+                    <h1>İslami Podcast</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="settings-btn" id="settingsBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 1.54l4.24 4.24M1 12h6m6 0h6m-13.22 4.22l-4.24 4.24m16.92 0l-4.24-4.24"/>
+                        </svg>
+                    </button>
+                    <button class="search-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Continue Listening Section -->
+            <section class="continue-listening-section">
+                <div class="section-header">
+                    <h2 class="section-title">Dinlemeye Devam Et</h2>
+                    <button class="see-all-btn">Tümünü Gör</button>
+                </div>
+                <div class="continue-listening-list">
+                    <div class="continue-item">
+                        <div class="continue-image">
+                            <div class="placeholder-image">📿</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        <div class="continue-info">
+                            <h3>Namazın Hükmü</h3>
+                            <p class="continue-description">Namazın İslam'daki yeri ve önemi</p>
+                            <div class="continue-meta">
+                                <span class="time-remaining">6:32 kala</span>
+                                <span class="progress-text">%65 tamamlandı</span>
+                            </div>
+                        </div>
+                        <button class="continue-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="continue-item">
+                        <div class="continue-image">
+                            <div class="placeholder-image">🕋</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="continue-info">
+                            <h3>Hac ve Umre</h3>
+                            <p class="continue-description">Hac farizasının hikmetleri</p>
+                            <div class="continue-meta">
+                                <span class="time-remaining">15:30 kala</span>
+                                <span class="progress-text">%30 tamamlandı</span>
+                            </div>
+                        </div>
+                        <button class="continue-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="categories-section">
+                <h2 class="section-title">Kategoriler</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">📖</div>
+                        <h3>Kur'an-ı Kerim</h3>
+                        <span class="podcast-count">12 Podcast</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🙏</div>
+                        <h3>Dua ve Zikir</h3>
+                        <span class="podcast-count">8 Podcast</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">👳</div>
+                        <h3>Peygamberler</h3>
+                        <span class="podcast-count">15 Podcast</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🕌</div>
+                        <h3>İbadetler</h3>
+                        <span class="podcast-count">10 Podcast</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">💫</div>
+                        <h3>Ahlak</h3>
+                        <span class="podcast-count">7 Podcast</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🌟</div>
+                        <h3>İslam Tarihi</h3>
+                        <span class="podcast-count">20 Podcast</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prayer Times Section -->
+            <section class="prayer-times-section">
+                <h2 class="section-title">Namaz Vakitleri</h2>
+                <div class="prayer-times-container">
+                    <div class="calendar-info">
+                        <span class="miladi-date" id="miladiDateSmall">17 Ocak 2026 Cumartesi</span>
+                        <span class="hijri-date" id="hijriDateSmall">16 Recep 1446 Cumartesi</span>
+                    </div>
+                    <div class="current-prayer">
+                        <div class="prayer-icon">🕌</div>
+                        <div class="prayer-info">
+                            <h3>Öğle</h3>
+                            <p class="prayer-time">13:47</p>
+                            <p class="prayer-status">Şu an</p>
+                        </div>
+                    </div>
+                    <div class="next-prayers">
+                        <div class="prayer-item">
+                            <span class="prayer-name">İkindi</span>
+                            <span class="prayer-time">16:30</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Akşam</span>
+                            <span class="prayer-time">19:15</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Yatsı</span>
+                            <span class="prayer-time">20:45</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">İmsak</span>
+                            <span class="prayer-time">05:30</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Podcasts -->
+            <section class="recent-section">
+                <div class="section-header">
+                    <h2 class="section-title">Son Eklenenler</h2>
+                    <button class="see-all-btn">Tümünü Gör</button>
+                </div>
+                <div class="podcast-list">
+                    <div class="podcast-item">
+                        <div class="podcast-image">
+                            <div class="placeholder-image">📿</div>
+                        </div>
+                        <div class="podcast-info">
+                            <h3>Namazın Hükmü</h3>
+                            <p class="podcast-description">Namazın İslam'daki yeri ve önemi</p>
+                            <div class="podcast-meta">
+                                <span class="duration">15:30</span>
+                                <span class="date">2 gün önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="podcast-item">
+                        <div class="podcast-image">
+                            <div class="placeholder-image">🕋</div>
+                        </div>
+                        <div class="podcast-info">
+                            <h3>Hac ve Umre</h3>
+                            <p class="podcast-description">Hac farizasının hikmetleri</p>
+                            <div class="podcast-meta">
+                                <span class="duration">22:15</span>
+                                <span class="date">3 gün önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="podcast-item">
+                        <div class="podcast-image">
+                            <div class="placeholder-image">🤲</div>
+                        </div>
+                        <div class="podcast-info">
+                            <h3>Sabır ve Şükür</h3>
+                            <p class="podcast-description">Zorluklarda sabrın önemi</p>
+                            <div class="podcast-meta">
+                                <span class="duration">17:20</span>
+                                <span class="date">1 hafta önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
+                <span>Ana Sayfa</span>
+            </button>
+            <button class="nav-item" data-page="audiobookPage">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M8 7h8"/>
+                    <path d="M8 11h6"/>
+                    <path d="M8 15h4"/>
+                </svg>
+                <span>Sesli Kitap</span>
+            </button>
+            <button class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                    <path d="M8 14h8"/>
+                    <path d="M8 18h8"/>
+                </svg>
+                <span>Podcastlar</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Audiobook Page -->
+    <div id="audiobookPage" class="audiobook-page" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">📚</div>
+                    <h1>Sesli Kitap</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="settings-btn" id="settingsBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 1.54l4.24 4.24M1 12h6m6 0h6m-13.22 4.22l-4.24 4.24m16.92 0l-4.24-4.24"/>
+                        </svg>
+                    </button>
+                    <button class="search-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="audiobook-main-content">
+            <!-- Categories -->
+            <section class="audiobook-categories">
+                <h2 class="section-title">Kategoriler</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">📖</div>
+                        <h3>İslam Tarihi</h3>
+                        <span class="book-count">15 Kitap</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🕌</div>
+                        <h3>Peygamber Hayatları</h3>
+                        <span class="book-count">12 Kitap</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🌟</div>
+                        <h3>Ahlak ve Erdem</h3>
+                        <span class="book-count">18 Kitap</span>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🙏</div>
+                        <h3>İbadetler</h3>
+                        <span class="book-count">10 Kitap</span>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Audiobook List -->
+            <section class="audiobook-list-section">
+                <h2 class="section-title">Sesli Kitaplar</h2>
+                <div class="audiobook-list">
+                    <div class="audiobook-item">
+                        <div class="book-cover-small">
+                            <div class="placeholder-image">📕</div>
+                        </div>
+                        <div class="audiobook-info">
+                            <h4>Hz. Muhammed'in Hayatı</h4>
+                            <p>Asr-ı Saadet</p>
+                            <span class="duration">8 saat 45 dakika</span>
+                        </div>
+                        <button class="play-small-btn" data-audiobook="muhammed-hayati">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chapter List (hidden by default) -->
+                <div class="chapter-list-inline" id="chapterList" style="display: none;">
+                    <h4>Bölümler</h4>
+                    <div class="chapters-container" id="chaptersContainer">
+                        <!-- Chapters will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Audiobooks -->
+            <section class="recent-audiobooks">
+                <h2 class="section-title">Son Eklenenler</h2>
+                <div class="audiobook-list">
+                    <div class="audiobook-item">
+                        <div class="book-cover-small">
+                            <div class="placeholder-image">📗</div>
+                        </div>
+                        <div class="book-info">
+                            <h3>Sahabe Hayatları</h3>
+                            <p class="book-author">İlhami Güler</p>
+                            <div class="book-meta">
+                                <span class="duration">6 saat 20 dakika</span>
+                                <span class="date">2 gün önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="audiobook-item">
+                        <div class="book-cover-small">
+                            <div class="placeholder-image">📘</div>
+                        </div>
+                        <div class="book-info">
+                            <h3>İslam'da Sabır</h3>
+                            <p class="book-author">Ali Ünal</p>
+                            <div class="book-meta">
+                                <span class="duration">4 saat 15 dakika</span>
+                                <span class="date">1 hafta önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="audiobook-item">
+                        <div class="book-cover-small">
+                            <div class="placeholder-image">📙</div>
+                        </div>
+                        <div class="book-info">
+                            <h3>Dua ve Zikir</h3>
+                            <p class="book-author">Necdet Subaşı</p>
+                            <div class="book-meta">
+                                <span class="duration">3 saat 30 dakika</span>
+                                <span class="date">2 hafta önce</span>
+                            </div>
+                        </div>
+                        <button class="play-small-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item" data-page="home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
+                <span>Ana Sayfa</span>
+            </button>
+            <button class="nav-item active">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    <path d="M8 7h8"/>
+                    <path d="M8 11h6"/>
+                    <path d="M8 15h4"/>
+                </svg>
+                <span>Sesli Kitap</span>
+            </button>
+            <button class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                    <path d="M8 14h8"/>
+                    <path d="M8 18h8"/>
+                </svg>
+                <span>Podcastlar</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Prayer Times Modal -->
+    <div id="prayerTimesModal" class="prayer-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Namaz Vakitleri</h2>
+                <button class="close-modal" id="closePrayerModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Settings Section -->
+                <div class="settings-section">
+                    <div class="setting-group">
+                        <label>Şehir Seçimi</label>
+                        <select id="citySelect" class="setting-select">
+                            <option value="istanbul">İstanbul</option>
+                            <option value="ankara">Ankara</option>
+                            <option value="izmir">İzmir</option>
+                            <option value="bursa">Bursa</option>
+                            <option value="adana">Adana</option>
+                            <option value="antalya">Antalya</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>Hicri Ay</label>
+                        <select id="hijriMonthSelect" class="setting-select">
+                            <option value="muharrem">Muharrem</option>
+                            <option value="safar">Safer</option>
+                            <option value="rebiulevvel">Rebiülevvel</option>
+                            <option value="rebiulahir">Rebiülahir</option>
+                            <option value="cemaziyelevvel">Cemaziyelevvel</option>
+                            <option value="cemaziyelahir">Cemaziyelahir</option>
+                            <option value="receb">Recep</option>
+                            <option value="saban">Şaban</option>
+                            <option value="ramazan">Ramazan</option>
+                            <option value="sevval">Şevval</option>
+                            <option value="zilkade">Zilkade</option>
+                            <option value="zilhice">Zilhicce</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Calendar Section -->
+                <div class="calendar-section">
+                    <h3>Aylik Namaz Takvimi</h3>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Today's Prayer Times -->
+                <div class="today-prayers">
+                    <h3>Bugünkü Namaz Vakitleri</h3>
+                    <div class="prayer-times-list">
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">İmsak</span>
+                            <span class="prayer-time" id="imsakTime">05:30</span>
+                        </div>
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">Sabah</span>
+                            <span class="prayer-time" id="sabahTime">05:45</span>
+                        </div>
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">Öğle</span>
+                            <span class="prayer-time" id="ogleTime">13:47</span>
+                        </div>
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">İkindi</span>
+                            <span class="prayer-time" id="ikindiTime">16:30</span>
+                        </div>
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">Akşam</span>
+                            <span class="prayer-time" id="aksamTime">19:15</span>
+                        </div>
+                        <div class="prayer-time-item">
+                            <span class="prayer-name">Yatsı</span>
+                            <span class="prayer-time" id="yatsiTime">20:45</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Player -->
+    <div class="mini-player" style="display: none;">
+        <div class="mini-player-content">
+            <div class="mini-player-image">
+                <div class="placeholder-image">🌙</div>
+            </div>
+            <div class="mini-player-info">
+                <h4>Peygamberimizin Hayatı</h4>
+                <p>Bölüm 1</p>
+            </div>
+            <div class="mini-player-controls">
+                <button class="control-btn" id="rewindBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                    </svg>
+                </button>
+                <button class="mini-play-btn" id="miniPlayBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                <button class="control-btn" id="forwardBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="mini-player-extra">
+                <button class="speed-btn" id="speedBtn">1x</button>
+                <button class="close-mini-player" id="closeMiniPlayer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="mini-player-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ayarlar</h2>
+                <button class="close-modal" id="closeSettingsModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Color Theme Settings -->
+                <div class="settings-section">
+                    <h3>Renk Teması</h3>
+                    <div class="setting-group">
+                        <label>Renk Paleti</label>
+                        <div class="color-palettes">
+                            <div class="color-palette" data-theme="default">
+                                <div class="color-preview">
+                                    <div class="color-dot primary" style="background: #2c5f2d;"></div>
+                                    <div class="color-dot secondary" style="background: #97bc62;"></div>
+                                    <div class="color-dot accent" style="background: #f4e4c1;"></div>
+                                </div>
+                                <span>Varsayılan</span>
+                            </div>
+                            <div class="color-palette" data-theme="ocean">
+                                <div class="color-preview">
+                                    <div class="color-dot primary" style="background: #1e3a8a;"></div>
+                                    <div class="color-dot secondary" style="background: #3b82f6;"></div>
+                                    <div class="color-dot accent" style="background: #dbeafe;"></div>
+                                </div>
+                                <span>Okyanus</span>
+                            </div>
+                            <div class="color-palette" data-theme="sunset">
+                                <div class="color-preview">
+                                    <div class="color-dot primary" style="background: #dc2626;"></div>
+                                    <div class="color-dot secondary" style="background: #f97316;"></div>
+                                    <div class="color-dot accent" style="background: #fef2f2;"></div>
+                                </div>
+                                <span>Gün Batımı</span>
+                            </div>
+                            <div class="color-palette" data-theme="forest">
+                                <div class="color-preview">
+                                    <div class="color-dot primary" style="background: #14532d;"></div>
+                                    <div class="color-dot secondary" style="background: #22c55e;"></div>
+                                    <div class="color-dot accent" style="background: #f0fdf4;"></div>
+                                </div>
+                                <span>Orman</span>
+                            </div>
+                            <div class="color-palette" data-theme="purple">
+                                <div class="color-preview">
+                                    <div class="color-dot primary" style="background: #6b21a8;"></div>
+                                    <div class="color-dot secondary" style="background: #a855f7;"></div>
+                                    <div class="color-dot accent" style="background: #faf5ff;"></div>
+                                </div>
+                                <span>Mor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Settings -->
+                <div class="settings-section">
+                    <h3>Diğer Ayarlar</h3>
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="notificationsEnabled">
+                            <span class="checkmark"></span>
+                            Bildirimleri Aç
+                        </label>
+                    </div>
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoPlayEnabled">
+                            <span class="checkmark"></span>
+                            Otomatik Oynat
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="islami-podcast.js"></script>
+</body>
+</html>
