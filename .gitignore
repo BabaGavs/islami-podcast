@@ -1,0 +1,22 @@
+# Audio files (too large for GitHub)
+audio/*.mp3
+audio/*.m4a
+audio/*.wav
+audio/*.flac
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if using npm)
+node_modules/
+
+# Build files
+dist/
+build/
