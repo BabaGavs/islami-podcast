@@ -630,12 +630,12 @@ document.addEventListener('DOMContentLoaded', function() {
             description: "Peygamberimizin doğumundan vefatına kadar olan hayatını anlatan kapsamlı eser.",
             duration: "8 saat 45 dakika",
             chapters: [
-                { id: 1, title: "Fil Vakası - Peygamberimizin Doğumu", duration: "18:02", file: "./audio/hz-muhammed-hayati.mp3" },
-                { id: 2, title: "Anneye Veda", duration: "21:39", file: "./audio/hz.muhammed-hayati-2.mp3" },
-                { id: 3, title: "Şam Yolculuğu", duration: "15:07", file: "./audio/hz-muhammed-hayati-3.mp3" },
-                { id: 4, title: "Hz. Hatice ile Evlilik", duration: "19:05", file: "./audio/hz-muhammed-hayati-4.mp3" },
-                { id: 5, title: "Zeyd ile Tanışma", duration: "13:47", file: "./audio/hz-muhammed-hayati-5.mp3" },
-                { id: 6, title: "İlk Vahiy", duration: "16:37", file: "./audio/hz-muhammed-hayati-6.mp3" },
+                { id: 1, title: "Fil Vakası - Peygamberimizin Doğumu", duration: "18:02", file: "/audio/hz-muhammed-hayati.mp3" },
+                { id: 2, title: "Anneye Veda", duration: "21:39", file: "/audio/hz-muhammed-hayati-2.mp3" },
+                { id: 3, title: "Şam Yolculuğu", duration: "15:07", file: "/audio/hz-muhammed-hayati-3.mp3" },
+                { id: 4, title: "Hz. Hatice ile Evlilik", duration: "19:05", file: "/audio/hz-muhammed-hayati-4.mp3" },
+                { id: 5, title: "Zeyd ile Tanışma", duration: "13:47", file: "/audio/hz-muhammed-hayati-5.mp3" },
+                { id: 6, title: "İlk Vahiy", duration: "16:37", file: "/audio/hz-muhammed-hayati-6.mp3" },
                 { id: 7, title: "Bölüm 7: Mekke Dönemi", duration: "24:45", file: "./audio/hz-muhammed-hayati.mp3" },
                 { id: 8, title: "Bölüm 8: Hicret", duration: "17:20", file: "./audio/hz-muhammed-hayati.mp3" },
                 { id: 9, title: "Bölüm 9: Medine'ye Varış", duration: "15:50", file: "./audio/hz-muhammed-hayati.mp3" },
@@ -654,7 +654,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { id: 22, title: "Bölüm 22: Vefat", duration: "21:05", file: "./audio/hz-muhammed-hayati.mp3" }
             ],
             cover: "📕",
-            audioFile: "./audio/hz-muhammed-hayati.mp3" // İndirdiğiniz MP3 dosyasının yolu
+            audioFile: "/audio/hz-muhammed-hayati.mp3" // İndirdiğiniz MP3 dosyasının yolu
         },
         recent: [
             {
