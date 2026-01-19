@@ -1393,6 +1393,422 @@ body {
     color: var(--text-primary);
 }
 
+/* Full Screen Player */
+.full-screen-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    color: white;
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.collapse-btn, .player-header .menu-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.collapse-btn:hover, .player-header .menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.player-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.player-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+}
+
+/* Album Art */
+.album-art {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.album-image {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.album-image .placeholder-image {
+    font-size: 6rem;
+    opacity: 0.8;
+}
+
+.album-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Track Info */
+.track-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.track-info h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.track-info p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-container {
+    margin-bottom: 1rem;
+}
+
+.progress-bar-full {
+    position: relative;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.progress-fill-full {
+    height: 100%;
+    background: var(--secondary-color);
+    border-radius: 2px;
+    position: relative;
+    transition: width 0.1s ease;
+}
+
+.progress-handle {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.progress-bar-full:hover .progress-handle {
+    opacity: 1;
+}
+
+.progress-handle:active {
+    cursor: grabbing;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.time-display-full {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Main Controls */
+.main-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.control-btn-large {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn-large:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.play-btn-large {
+    background: var(--secondary-color);
+    border: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.play-btn-large:hover {
+    transform: scale(1.05);
+    background: var(--primary-color);
+}
+
+.play-btn-large:active {
+    transform: scale(0.95);
+}
+
+/* Secondary Controls */
+.secondary-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.control-btn-small {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.control-btn-small:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.control-btn-small.active {
+    color: var(--secondary-color);
+}
+
+/* Chapter List Section */
+.chapter-list-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.chapter-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.chapter-list-header h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.toggle-chapters {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.25rem;
+}
+
+.toggle-chapters:hover {
+    color: white;
+}
+
+.toggle-chapters.active {
+    transform: rotate(180deg);
+}
+
+.chapter-list-full {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.chapter-list-full.expanded {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chapter-item-full {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chapter-item-full:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.chapter-item-full.active {
+    background: rgba(151, 188, 98, 0.2);
+    border-left: 3px solid var(--secondary-color);
+}
+
+.chapter-item-full:last-child {
+    border-bottom: none;
+}
+
+.chapter-info-full {
+    flex: 1;
+}
+
+.chapter-info-full h5 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.25rem 0;
+}
+
+.chapter-info-full p {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.chapter-duration-full {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .album-image {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .album-image .placeholder-image {
+        font-size: 5rem;
+    }
+    
+    .track-info h2 {
+        font-size: 1.25rem;
+    }
+    
+    .main-controls {
+        gap: 1.5rem;
+    }
+    
+    .secondary-controls {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .album-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .album-image .placeholder-image {
+        font-size: 4rem;
+    }
+    
+    .player-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .main-controls {
+        gap: 1rem;
+    }
+    
+    .control-btn-large {
+        padding: 0.25rem;
+    }
+    
+    .play-btn-large {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.full-screen-player.show {
+    display: flex;
+    animation: slideUp 0.3s ease-out;
+}
+
 /* Chapter Toggle Button */
 .chapter-toggle {
     margin-top: 1rem;

@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İslami Podcast</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2c5f2d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="İslami Podcast">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="islami-podcast.css">
 </head>
@@ -577,6 +591,118 @@
             <div class="time-display">
                 <span id="currentTime">0:00</span>
                 <span id="totalTime">0:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Screen Player -->
+    <div id="fullScreenPlayer" class="full-screen-player" style="display: none;">
+        <div class="player-header">
+            <button class="collapse-btn" id="collapsePlayerBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <h3>Şimdi Çalıyor</h3>
+            <button class="menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="1"/>
+                    <circle cx="12" cy="5" r="1"/>
+                    <circle cx="12" cy="19" r="1"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="player-content">
+            <!-- Album Art -->
+            <div class="album-art">
+                <div class="album-image">
+                    <div class="placeholder-image">📕</div>
+                </div>
+            </div>
+
+            <!-- Track Info -->
+            <div class="track-info">
+                <h2 id="playerTitle">Bölüm Başlığı</h2>
+                <p id="playerAuthor">Yazar Adı</p>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <div class="progress-container">
+                    <div class="progress-bar-full" id="progressBarFull">
+                        <div class="progress-fill-full" id="progressFillFull"></div>
+                        <div class="progress-handle" id="progressHandle"></div>
+                    </div>
+                </div>
+                <div class="time-display-full">
+                    <span id="currentTimeFull">0:00</span>
+                    <span id="totalTimeFull">0:00</span>
+                </div>
+            </div>
+
+            <!-- Main Controls -->
+            <div class="main-controls">
+                <button class="control-btn-large" id="shuffleBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn-large" id="prevChapterBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                    </svg>
+                </button>
+                
+                <button class="play-btn-large" id="playBtnLarge">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn-large" id="nextChapterBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn-large" id="repeatBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 4v6h6M23 20v-6h-6"/>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Secondary Controls -->
+            <div class="secondary-controls">
+                <button class="control-btn-small" id="speedBtnFull">1x</button>
+                <button class="control-btn-small" id="queueBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+                    </svg>
+                </button>
+                <button class="control-btn-small" id="favoriteBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Chapter List -->
+            <div class="chapter-list-section">
+                <div class="chapter-list-header">
+                    <h4>Bölümler</h4>
+                    <button class="toggle-chapters" id="toggleChaptersBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="chapter-list-full" id="chapterListFull">
+                    <!-- Chapters will be populated by JavaScript -->
+                </div>
             </div>
         </div>
     </div>

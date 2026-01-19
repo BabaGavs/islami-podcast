@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .icon-generator {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .icon-box {
+            text-align: center;
+        }
+        .icon {
+            background: linear-gradient(135deg, #2c5f2d 0%, #97bc62 100%);
+            border-radius: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
+        }
+        .icon-192 { width: 192px; height: 192px; font-size: 96px; }
+        .icon-512 { width: 512px; height: 512px; font-size: 256px; }
+        button {
+            background: #2c5f2d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-generator">
+        <div class="icon-box">
+            <div class="icon icon-192" id="icon192">🕌</div>
+            <div>192x192px</div>
+            <button onclick="downloadIcon('icon192', 192)">İndir</button>
+        </div>
+        <div class="icon-box">
+            <div class="icon icon-512" id="icon512">🕌</div>
+            <div>512x512px</div>
+            <button onclick="downloadIcon('icon512', 512)">İndir</button>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function downloadIcon(elementId, size) {
+            const element = document.getElementById(elementId);
+            
+            html2canvas(element, {
+                width: size,
+                height: size,
+                scale: 1
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `icon-${size}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>

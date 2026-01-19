@@ -1,5 +1,18 @@
 // Islami Podcast Mobile App JavaScript
 
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Splash Screen
     const splashScreen = document.getElementById('splashScreen');
@@ -617,12 +630,12 @@ document.addEventListener('DOMContentLoaded', function() {
             description: "Peygamberimizin doğumundan vefatına kadar olan hayatını anlatan kapsamlı eser.",
             duration: "8 saat 45 dakika",
             chapters: [
-                { id: 1, title: "Bölüm 1: Fil Vakası - Peygamberimizin Doğumu", duration: "18:02", file: "./audio/hz-muhammed-hayati.mp3" },
-                { id: 2, title: "Bölüm 2: Anneye Veda", duration: "21:39", file: "./audio/hz.muhammed-hayati-2.mp3" },
-                { id: 3, title: "Bölüm 3: Peygamberlik Öncesi", duration: "22:10", file: "./audio/hz-muhammed-hayati.mp3" },
-                { id: 4, title: "Bölüm 4: İlk Vahiy", duration: "16:20", file: "./audio/hz-muhammed-hayati.mp3" },
-                { id: 5, title: "Bölüm 5: Gizli Tebliğ", duration: "19:15", file: "./audio/hz-muhammed-hayati.mp3" },
-                { id: 6, title: "Bölüm 6: Açık Tebliğ", duration: "21:30", file: "./audio/hz-muhammed-hayati.mp3" },
+                { id: 1, title: "Fil Vakası - Peygamberimizin Doğumu", duration: "18:02", file: "./audio/hz-muhammed-hayati.mp3" },
+                { id: 2, title: "Anneye Veda", duration: "21:39", file: "./audio/hz.muhammed-hayati-2.mp3" },
+                { id: 3, title: "Şam Yolculuğu", duration: "15:07", file: "./audio/hz-muhammed-hayati-3.mp3" },
+                { id: 4, title: "Hz. Hatice ile Evlilik", duration: "19:05", file: "./audio/hz-muhammed-hayati-4.mp3" },
+                { id: 5, title: "Zeyd ile Tanışma", duration: "13:47", file: "./audio/hz-muhammed-hayati-5.mp3" },
+                { id: 6, title: "İlk Vahiy", duration: "16:37", file: "./audio/hz-muhammed-hayati-6.mp3" },
                 { id: 7, title: "Bölüm 7: Mekke Dönemi", duration: "24:45", file: "./audio/hz-muhammed-hayati.mp3" },
                 { id: 8, title: "Bölüm 8: Hicret", duration: "17:20", file: "./audio/hz-muhammed-hayati.mp3" },
                 { id: 9, title: "Bölüm 9: Medine'ye Varış", duration: "15:50", file: "./audio/hz-muhammed-hayati.mp3" },
@@ -1556,6 +1569,317 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
+    // Full Screen Player Functionality
+    const fullScreenPlayer = document.getElementById('fullScreenPlayer');
+    const collapsePlayerBtn = document.getElementById('collapsePlayerBtn');
+    const playBtnLarge = document.getElementById('playBtnLarge');
+    const progressBarFull = document.getElementById('progressBarFull');
+    const progressFillFull = document.getElementById('progressFillFull');
+    const progressHandle = document.getElementById('progressHandle');
+    const currentTimeFull = document.getElementById('currentTimeFull');
+    const totalTimeFull = document.getElementById('totalTimeFull');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerAuthor = document.getElementById('playerAuthor');
+    const speedBtnFull = document.getElementById('speedBtnFull');
+    const toggleChaptersBtn = document.getElementById('toggleChaptersBtn');
+    const chapterListFull = document.getElementById('chapterListFull');
+    const prevChapterBtn = document.getElementById('prevChapterBtn');
+    const nextChapterBtn = document.getElementById('nextChapterBtn');
+    
+    let isDragging = false;
+    let isFullScreenOpen = false;
+    
+    // Open full screen player when clicking on mini player
+    if (miniPlayer) {
+        miniPlayer.addEventListener('click', function(e) {
+            // Don't open if clicking on controls
+            if (e.target.closest('.mini-player-controls') || e.target.closest('.mini-player-extra')) {
+                return;
+            }
+            openFullScreenPlayer();
+        });
+    }
+    
+    function openFullScreenPlayer() {
+        if (!currentChapter) return;
+        
+        isFullScreenOpen = true;
+        fullScreenPlayer.style.display = 'flex';
+        fullScreenPlayer.classList.add('show');
+        
+        // Update player info
+        playerTitle.textContent = currentChapter.title;
+        playerAuthor.textContent = currentChapter.author || 'Asr-ı Saadet';
+        
+        // Update play button
+        updateFullScreenPlayButton();
+        
+        // Update progress
+        updateFullScreenProgress();
+        
+        // Populate chapters
+        populateChapterList();
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeFullScreenPlayer() {
+        isFullScreenOpen = false;
+        fullScreenPlayer.classList.remove('show');
+        setTimeout(() => {
+            fullScreenPlayer.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+    
+    // Collapse button handler
+    if (collapsePlayerBtn) {
+        collapsePlayerBtn.addEventListener('click', closeFullScreenPlayer);
+    }
+    
+    // Large play button handler
+    if (playBtnLarge) {
+        playBtnLarge.addEventListener('click', () => {
+            if (!currentAudio) return;
+            
+            if (isPlaying) {
+                pauseAudiobook();
+            } else {
+                currentAudio.play();
+                isPlaying = true;
+            }
+            updateFullScreenPlayButton();
+            updateMiniPlayerControls();
+        });
+    }
+    
+    function updateFullScreenPlayButton() {
+        if (playBtnLarge) {
+            if (isPlaying) {
+                playBtnLarge.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            } else {
+                playBtnLarge.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        }
+    }
+    
+    // Progress bar functionality
+    function updateFullScreenProgress() {
+        if (!currentAudio) return;
+        
+        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+        progressFillFull.style.width = progress + '%';
+        currentTimeFull.textContent = formatTime(currentAudio.currentTime);
+        totalTimeFull.textContent = formatTime(currentAudio.duration);
+    }
+    
+    // Progress bar drag functionality
+    if (progressBarFull) {
+        progressBarFull.addEventListener('click', function(e) {
+            if (!currentAudio) return;
+            
+            const rect = progressBarFull.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            currentAudio.currentTime = percent * currentAudio.duration;
+            updateFullScreenProgress();
+        });
+        
+        // Drag functionality
+        progressHandle.addEventListener('mousedown', startDragging);
+        progressHandle.addEventListener('touchstart', startDragging);
+    }
+    
+    function startDragging(e) {
+        e.preventDefault();
+        isDragging = true;
+        
+        const moveHandler = (e) => {
+            if (!isDragging || !currentAudio) return;
+            
+            const rect = progressBarFull.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+            currentAudio.currentTime = percent * currentAudio.duration;
+            updateFullScreenProgress();
+        };
+        
+        const endHandler = () => {
+            isDragging = false;
+            document.removeEventListener('mousemove', moveHandler);
+            document.removeEventListener('mouseup', endHandler);
+            document.removeEventListener('touchmove', moveHandler);
+            document.removeEventListener('touchend', endHandler);
+        };
+        
+        document.addEventListener('mousemove', moveHandler);
+        document.addEventListener('mouseup', endHandler);
+        document.addEventListener('touchmove', moveHandler);
+        document.addEventListener('touchend', endHandler);
+    }
+    
+    // Speed control
+    if (speedBtnFull) {
+        speedBtnFull.addEventListener('click', () => {
+            if (!currentAudio) return;
+            
+            currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+            playbackSpeed = speeds[currentSpeedIndex];
+            currentAudio.playbackRate = playbackSpeed;
+            speedBtnFull.textContent = playbackSpeed + 'x';
+            
+            // Update mini player speed button too
+            const miniSpeedBtn = document.getElementById('speedBtn');
+            if (miniSpeedBtn) {
+                miniSpeedBtn.textContent = playbackSpeed + 'x';
+            }
+        });
+    }
+    
+    // Chapter list toggle
+    if (toggleChaptersBtn) {
+        toggleChaptersBtn.addEventListener('click', () => {
+            chapterListFull.classList.toggle('expanded');
+            toggleChaptersBtn.classList.toggle('active');
+        });
+    }
+    
+    // Populate chapter list
+    function populateChapterList() {
+        if (!audiobookData || !audiobookData.featured || !audiobookData.featured.chapters) return;
+        
+        chapterListFull.innerHTML = '';
+        
+        audiobookData.featured.chapters.forEach((chapter, index) => {
+            const chapterItem = document.createElement('div');
+            chapterItem.className = 'chapter-item-full';
+            if (currentChapter && currentChapter.id === chapter.id) {
+                chapterItem.classList.add('active');
+            }
+            
+            chapterItem.innerHTML = `
+                <div class="chapter-info-full">
+                    <h5>${chapter.title}</h5>
+                    <p>Bölüm ${chapter.id}</p>
+                </div>
+                <div class="chapter-duration-full">${chapter.duration}</div>
+            `;
+            
+            chapterItem.addEventListener('click', () => {
+                playChapter(chapter);
+            });
+            
+            chapterListFull.appendChild(chapterItem);
+        });
+    }
+    
+    // Play specific chapter
+    function playChapter(chapter) {
+        const chapterWithAudio = {
+            ...chapter,
+            audioFile: chapter.file,
+            author: audiobookData.featured.author
+        };
+        
+        playAudiobook(chapterWithAudio);
+        updateFullScreenPlayButton();
+        
+        // Update active state in chapter list
+        document.querySelectorAll('.chapter-item-full').forEach(item => {
+            item.classList.remove('active');
+        });
+        event.currentTarget.classList.add('active');
+    }
+    
+    // Previous/Next chapter buttons
+    if (prevChapterBtn) {
+        prevChapterBtn.addEventListener('click', () => {
+            if (!currentChapter || !audiobookData.featured.chapters) return;
+            
+            const currentIndex = audiobookData.featured.chapters.findIndex(ch => ch.id === currentChapter.id);
+            if (currentIndex > 0) {
+                const prevChapter = audiobookData.featured.chapters[currentIndex - 1];
+                playChapter(prevChapter);
+            }
+        });
+    }
+    
+    if (nextChapterBtn) {
+        nextChapterBtn.addEventListener('click', () => {
+            if (!currentChapter || !audiobookData.featured.chapters) return;
+            
+            const currentIndex = audiobookData.featured.chapters.findIndex(ch => ch.id === currentChapter.id);
+            if (currentIndex < audiobookData.featured.chapters.length - 1) {
+                const nextChapter = audiobookData.featured.chapters[currentIndex + 1];
+                playChapter(nextChapter);
+            }
+        });
+    }
+    
+    // Update existing audio event listeners to also update full screen player
+    function updateExistingAudioListeners() {
+        if (currentAudio) {
+            // Remove existing timeupdate listener to avoid duplicates
+            currentAudio.removeEventListener('timeupdate', updateProgressBar);
+            
+            // Add new timeupdate listener that updates both players
+            currentAudio.addEventListener('timeupdate', () => {
+                updateProgressBar();
+                if (isFullScreenOpen) {
+                    updateFullScreenProgress();
+                }
+            });
+            
+            // Update ended listener
+            currentAudio.addEventListener('ended', () => {
+                isPlaying = false;
+                currentAudio = null;
+                updateMiniPlayer(audiobookData.featured, false);
+                updateMiniPlayerControls();
+                updateFullScreenPlayButton();
+                
+                if (isFullScreenOpen) {
+                    closeFullScreenPlayer();
+                }
+            });
+        }
+    }
+    
+    // Modify the existing playAudiobook function to update full screen player
+    const originalPlayAudiobook = playAudiobook;
+    playAudiobook = function(audiobook) {
+        originalPlayAudiobook(audiobook);
+        updateExistingAudioListeners();
+        
+        if (isFullScreenOpen) {
+            playerTitle.textContent = audiobook.title;
+            playerAuthor.textContent = audiobook.author || 'Asr-ı Saadet';
+            updateFullScreenPlayButton();
+            populateChapterList();
+        }
+    };
+    
+    // Handle escape key to close full screen player
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isFullScreenOpen) {
+            closeFullScreenPlayer();
+        }
+    });
+    
+    // Handle swipe down to close full screen player
+    fullScreenPlayer.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    });
+    
+    fullScreenPlayer.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const swipeDistance = touchEndY - touchStartY;
+        
+        if (swipeDistance > 100) { // Swipe down more than 100px
+            closeFullScreenPlayer();
+        }
+    });
     
     // Audio simulation (placeholder for actual audio implementation)
     class AudioPlayer {
